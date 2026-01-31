@@ -2,9 +2,7 @@ pipeline{
     tools {
         maven  'mvn'
     }
-    agent {
-        label 'node1'
-    } 
+    agent any
     stages{
         stage('cloning the code'){
             steps{
