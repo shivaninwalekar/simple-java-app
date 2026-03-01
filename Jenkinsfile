@@ -1,25 +1,26 @@
 pipeline{
-    tools {
-        maven  'mvn'
-    }
     agent any
+    tools {
+    maven  "shivani"
+    }
     stages{
-        stage('cloning the code'){
+        stage("clone"){
             steps{
                 echo "cloning the code "
                 git branch: 'test', url: 'https://github.com/mantu0tech/simple-java-app.git'
             }
         }
-        stage('test the code'){
+        stage("build "){
             steps{
-                echo "testing the code  "
-                sh 'mvn clean install'
+                echo "running the code "
+                sh "mvn clean install"
             }
         }
-        stage('archive jar') {
-            steps {
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-    }
-}
+        stage("artifact "){
+            steps{
+                echo "packaging the code "
+                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+            }
+        }
     }
 }
